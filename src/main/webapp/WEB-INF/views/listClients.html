@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Список пользователей банка </title>
+</head>
+<body>
+
+<h1>Список пользователей Банка</h1>
+
+<table  border="2">
+<tr><th>id</th>
+    <th>username</th>
+    <th>role</th>
+</tr>
+<tbody>
+<tr th:each="client : ${page.content}">
+ 		<td th:text="${client.id}">id</td>
+ 		<td th:text="${client.username}">name</td>
+ 		<td th:text="${client.role}">role</td>
+ 		<td width="100"><a th:href="@{/accounts/addAccount/{id}(id=${client.id})}">Добавить новый счёт</a> </td>
+ 		<td width="100"><a th:href="@{/accounts/{id}(id=${client.id})}">Просмотреть счета клиента</a> </td>
+ 		<td width="100"><a th:href="@{/clients/deleteClient/{id}(id=${client.id})}">Удалить клиента</a> </td>
+ 		<td width="100"><a th:href="@{/clients/changeClient/{id}(id=${client.id})}">Изменить клиента</a> </td>
+ </tr>
+</tbody>
+</table>
+<span th:if="${page.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/clients(size=${page.size}, page=${pageNumber})}" th:text=${pageNumber}></a>
+</span>
+
+<div>
+<a th:href="@{/clients/addClient}">Добавить пользователя.</a>
+</div>
+
+
+<div th:insert="footer :: copy"></div>
+
+</body>
+</html>

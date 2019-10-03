@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Перевод средств</title>
+</head>
+<body>
+
+<h2>Перевод средств со счёта <span th:text="${account.id}"> </span> клиента <span th:text="${account.client.username}"> </span>.</h2>
+
+<form method="POST" th:action="@{/operations/addOperation/{id}(id=${account.id})}" th:object="${operation}">
+<label for="sum">Сумма перевода: </label>
+<input type="text" th:value="${account.sum}" name="sum"/><br/>
+<div th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Name Error</div>
+<label for="destination">Счёт назначения: </label>
+<input type="text" name="destination_id"/><br/>
+<div th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}">Name Error</div>
+<input type="submit" value="Transfer"/>
+</form>
+
+<div th:insert="footer :: copy"></div>
+
+</body>
+</html>

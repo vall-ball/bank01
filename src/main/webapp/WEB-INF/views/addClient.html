@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Добавление нового пользователя.</title>
+</head>
+<body>
+
+<div><h2>Добавление нового пользователя.</h2></div>
+
+<form method="POST" th:action="@{/clients/addClient}" th:object="${client}">
+	<label for="username">Username: </label>
+	<input type="text" th:field="*{username}" name="username"/><br/>
+	<div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
+	<label for="password">Password: </label>
+	<input type="password" th:field="*{password}" name="password"/><br/>
+	<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+ 	<p><b>Роль</b><Br>
+   	<input type="radio" name="role" value="Client" checked> Client <Br>
+   	<input type="radio" name="role" value="Bankir"> Bankir <Br>
+	</p>
+<input type="submit" value="Register"/>
+</form>
+
+<div th:insert="footer :: copy"></div>
+
+</body>
+</html>

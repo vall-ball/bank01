@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Добро пожаловать в Банк </title>
+</head>
+<body>
+ 
+ <h1>БАНК!!!</h1>
+
+<div>
+
+</div>
+<a th:href="@{/accounts}">Ваши счета</a>
+<div>
+<a th:href="@{/clients}">Список пользователей.(только для банкиров)</a>
+</div>
+
+<div th:insert="footer :: copy"></div>
+
+</body>
+</html>

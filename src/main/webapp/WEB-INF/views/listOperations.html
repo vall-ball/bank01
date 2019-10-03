@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Список операций</title>
+</head>
+<body>
+
+<h1>Список счетов <span th:text="${client.username}"></span></h1>
+
+<table  border="2">
+<tr><th>id</th>
+    <th>source</th>
+    <th>destination</th>
+    <th>date</th>
+    <th>time</th>
+    <th>sum</th>
+</tr>
+<tbody>
+<tr th:each="operation : ${page.getPageList()}">
+ 		<td th:text="${operation.id}">id</td>
+ 		<td th:text="${operation.source}">source</td>
+ 		<td th:text="${operation.destination}">destination</td>
+ 		<td th:text="${operation.date}">date</td>
+ 		<td th:text="${operation.time}">time</td>
+ 		<td th:text="${operation.sum}">sum</td>
+ </tr>
+</tbody>
+</table>
+
+<span th:if="${page.getPageCount() > 0}" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/operations/listOperations/{id}(id=${client.id},size=${page.getPageSize()}, page=${pageNumber})}" th:text=${pageNumber}></a>
+</span>
+
+<div><a th:href="@{/operations/listOperations/{id}(id=${client.id})}">Список ваших операций</a></div>
+
+<div th:insert="footer :: copy"></div>
+
+</body>
+</html>

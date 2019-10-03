@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Список счетов</title>
+</head>
+<body>
+
+<h1>Список счетов <span th:text="${client.username}"></span></h1>
+
+<table  border="2">
+<tr><th>id</th>
+    <th>username</th>
+    <th>sum</th>
+</tr>
+<tbody>
+<tr th:each="account : ${page.content}">
+ 		<td th:text="${account.id}">id</td>
+ 		<td th:text="${account.client.username}">name</td>
+ 		<td th:text="${account.sum}">role</td>
+ 		<td><a th:href="@{/operations/newOperation/{id}(id=${account.id})}">Переслать деньги с этого счёта</a></td>
+ </tr>
+</tbody>
+</table>
+
+<span th:if="${page.totalPages > 0}" th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/accounts(size=${page.size}, page=${pageNumber})}" th:text=${pageNumber}></a>
+</span>
+
+<div><a th:href="@{/operations/listOperations/{id}(id=${client.id})}">Список ваших операций</a></div>
+
+<div th:insert="footer :: copy"></div>
+
+</body>
+</html>

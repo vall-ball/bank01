@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Изменение счёта</title>
+</head>
+<body>
+
+<h2>Изменение счёта для пользователя  <span th:text="${account.client.username}"></span>.</h2>
+ <div><span th:text="${account}"></span></div>
+
+<form method="POST" th:action="@{/accounts/update}" th:object="${account}">
+<label for="sum">Сумма: </label>
+<input type="text" th:field="*{sum}" /><br/>
+<div th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Name Error</div>
+<input type="hidden" th:field="*{id}" /><br/>
+<input type="hidden" th:field="*{client.id}" /><br/>
+<input type="submit" value="Change"/>
+</form>
+
+<div th:insert="footer :: copy"></div>
+
+
+</body>
+</html>
